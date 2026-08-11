@@ -124,10 +124,6 @@
       padding:8px 8px 20px;min-height:118px;display:flex;align-items:center;
       justify-content:center;letter-spacing:.055em
     }
-    .hint{
-      max-width:760px;margin:0 auto 18px;text-align:center;color:#7a7285;
-      font-size:14px;font-style:italic;min-height:21px
-    }
     .options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .option{
       min-height:76px;border:1.5px solid var(--line);background:#fff;border-radius:18px;
@@ -610,7 +606,7 @@
         </p>
 
         <div class="intro-grid">
-          <div class="intro-chip"><b>15 + ?</b><span>întrebări 👀</span></div>
+          <div class="intro-chip"><b>20 + ?</b><span>întrebări 👀</span></div>
           <div class="intro-chip"><b>~10 min</b><span>de decoding</span></div>
           <div class="intro-chip"><b>3 niveluri</b><span>de dificultate</span></div>
         </div>
@@ -636,7 +632,6 @@
 
         <div class="question-label">Ce transmite mesajul?</div>
         <div id="emojiSentence" class="emoji-sentence">☕💻😵‍💫</div>
-        <div id="hint" class="hint"></div>
         <div id="options" class="options"></div>
 
         <div id="lifelinesWrap" class="lifelines-wrap">
@@ -768,7 +763,6 @@ const questions = [
   {
     level:"easy",
     emoji:"☕💻😵‍💫",
-    hint:"Context: prima parte a zilei.",
     options:[
       "Lucrez de prea mult timp și am nevoie de cafea",
       "Laptopul meu a băut cafeaua",
@@ -781,7 +775,6 @@ const questions = [
   {
     level:"easy",
     emoji:"👀📩⏳",
-    hint:"Context: ai trimis ceva important.",
     options:[
       "Îmi verific vederea la optometrist",
       "Aștept un răspuns la mesaj",
@@ -794,7 +787,6 @@ const questions = [
   {
     level:"easy",
     emoji:"🎉✅💪",
-    hint:"Context: final de task.",
     options:[
       "Task terminat. Victorie.",
       "Merg la sală după petrecere",
@@ -807,7 +799,6 @@ const questions = [
   {
     level:"easy",
     emoji:"📅⏰🏃‍♀️💨",
-    hint:"Context: ai un meeting în calendar.",
     options:[
       "Calendarul spune că trebuia deja să fiu acolo",
       "Am timp suficient, merg liniștit",
@@ -820,7 +811,6 @@ const questions = [
   {
     level:"easy",
     emoji:"🧠💡🚀",
-    hint:"Context: brainstorm.",
     options:[
       "Am o idee și vreau s-o punem rapid în mișcare",
       "Îmi imaginez o vacanță în spațiu",
@@ -834,7 +824,6 @@ const questions = [
   {
     level:"medium",
     emoji:"🙂👍",
-    hint:"Context: răspuns scurt într-un chat de lucru.",
     options:[
       "Sunt extrem de entuziasmat",
       "Am văzut, e în regulă / noted",
@@ -847,7 +836,6 @@ const questions = [
   {
     level:"medium",
     emoji:"👀🔥",
-    hint:"Context: cineva postează o idee sau un teaser.",
     options:[
       "Este literalmente un incendiu",
       "Mă uit atent, pare foarte interesant",
@@ -860,7 +848,6 @@ const questions = [
   {
     level:"medium",
     emoji:"💀😂",
-    hint:"Context: cineva spune ceva foarte amuzant.",
     options:[
       "Este o situație tragică",
       "Mor de râs",
@@ -873,7 +860,6 @@ const questions = [
   {
     level:"medium",
     emoji:"🫡✅",
-    hint:"Context: primești o sarcină.",
     options:[
       "Am înțeles, mă ocup",
       "Refuz politicos",
@@ -886,7 +872,6 @@ const questions = [
   {
     level:"medium",
     emoji:"🤡📅",
-    hint:"Context: ți-ai pus singur prea multe lucruri în calendar.",
     options:[
       "Am un eveniment de circ",
       "Mi-am făcut singur programul absurd și acum suport consecințele",
@@ -900,7 +885,6 @@ const questions = [
   {
     level:"hard",
     emoji:"🫠👍",
-    hint:"Context: cineva tocmai schimbă deadline-ul în mai devreme.",
     options:[
       "Super, ador schimbarea",
       "Sigur… mă descurc… cumva",
@@ -913,7 +897,6 @@ const questions = [
   {
     level:"hard",
     emoji:"👁️👄👁️",
-    hint:"Context: ai citit ceva neașteptat într-un chat.",
     options:[
       "Sunt complet neutru",
       "Sunt fără cuvinte / uimit într-un mod awkward",
@@ -926,7 +909,6 @@ const questions = [
   {
     level:"hard",
     emoji:"📉🙂",
-    hint:"Context: ai văzut rezultatele unei campanii.",
     options:[
       "Rezultatele au scăzut, dar încerc să rămân civilizat",
       "Rezultatele au crescut",
@@ -939,7 +921,6 @@ const questions = [
   {
     level:"hard",
     emoji:"🧍‍♀️🧍‍♂️🧍👀📱",
-    hint:"Context: un grup stă împreună, dar fiecare e pe telefon.",
     options:[
       "Socializare modernă: împreună fizic, separat digital",
       "Facem o fotografie de grup",
@@ -952,7 +933,6 @@ const questions = [
   {
     level:"hard",
     emoji:"❤️‍🔥🧠🤝🌍",
-    hint:"Context: mesaj despre o echipă și misiunea ei.",
     options:[
       "Pasiune + idei + colaborare + impact",
       "Dragoste la distanță",
@@ -961,7 +941,68 @@ const questions = [
     ],
     correct:0,
     feedback:"Final boss defeated. Aici emoji-urile funcționează aproape ca o propoziție conceptuală."
+  },
+  {
+    level:"hard",
+    emoji:"🥹👉👈",
+    options:[
+      "O rugăminte timidă / vulnerabilă, cu puțină presiune emoțională",
+      "Confuzie sinceră despre ce se întâmplă",
+      "Furie reprimată și evitare",
+      "Entuziasm fără nicio miză emoțională"
+    ],
+    correct:0,
+    feedback:"Da. 🥹 + 👉👈 = «nu vreau să te presez… DAR dacă ai putea…». Nivel de inocență: suspect de bine calculat. 😇"
+  },
+  {
+    level:"hard",
+    emoji:"🫥💬👥",
+    options:[
+      "Sentiment de invizibilitate / deconectare socială",
+      "Relaxare și confort în grup",
+      "Surpriză pozitivă",
+      "Concentrare intensă asupra conversației"
+    ],
+    correct:0,
+    feedback:"Exact. 🫥 e genul de emoji care spune «sunt aici fizic, social nu mai sunt sigur». Foarte specific. Foarte 2020s."
+  },
+  {
+    level:"hard",
+    emoji:"🙃👍✨",
+    options:[
+      "Optimism autentic",
+      "Politețe cu substrat de ironie / resemnare",
+      "Admirație sinceră",
+      "Entuziasm față de rezultat"
+    ],
+    correct:1,
+    feedback:"Corect. 🙃 poate transforma tot mesajul într-un «super, minunat, exact ce-mi lipsea». ✨ pasiv-agresiv premium."
+  },
+  {
+    level:"hard",
+    emoji:"🫣👀💬",
+    options:[
+      "Curiozitate anxioasă / anticipare cu disconfort",
+      "Dezinteres total",
+      "Furie directă",
+      "Încredere și siguranță"
+    ],
+    correct:0,
+    feedback:"Da. 🫣 + 👀 = «spune-mi… nu, stai… spune-mi». Curiozitate cu centură de siguranță."
+  },
+  {
+    level:"hard",
+    emoji:"😶‍🌫️🧠📉",
+    options:[
+      "Ceață mentală / dificultate de concentrare",
+      "Calm profund și claritate",
+      "Motivație ridicată",
+      "Frustrare interpersonală"
+    ],
+    correct:0,
+    feedback:"Exact. 😶‍🌫️ + 🧠 + 📉 = brain fog. Procesorul rulează, dar cu 47 de taburi deschise și un ventilator suspect."
   }
+
 ];
 
 
@@ -971,7 +1012,6 @@ const battleQuestions = {
       level:"expert",
       battle:"geography",
       emoji:"🇮🇸🌋💥☁️➡️✈️🚫🌍😡🧳🥪",
-      hint:"GEOGRAFIE EXPERT: identifică evenimentul și consecința geopspațială reprezentată.",
       options:[
         "Erupția Grímsvötn din 2011 și perturbarea temporară a unor rute aeriene din nordul Europei",
         "Erupția Eyjafjallajökull din 2010 și perturbarea extinsă a traficului aerian european prin norul de cenușă",
@@ -985,7 +1025,6 @@ const battleQuestions = {
       level:"expert",
       battle:"geography",
       emoji:"🧊🏔️☀️⬆️➡️💧➡️🌊⬆️➡️🏝️😬➡️🧳",
-      hint:"GEOGRAFIE EXPERT: urmărește relația dintre criosferă, nivelul mării și vulnerabilitatea umană.",
       options:[
         "Retragerea ghețarilor montani influențează în principal debitele regionale, iar efectul asupra nivelului mării este neglijabil la scară globală",
         "Topirea gheții marine arctice contribuie direct la creșterea nivelului mării în aceeași măsură ca topirea gheții continentale",
@@ -999,7 +1038,6 @@ const battleQuestions = {
       level:"expert",
       battle:"geography",
       emoji:"🌊🔥➡️🐟🧭❄️⬆️➡️🎣❓➡️🍽️📉➡️👥😵‍💫",
-      hint:"GEOGRAFIE EXPERT: identifică mecanismul care leagă încălzirea oceanului de efectele socio-economice.",
       options:[
         "Încălzirea oceanului poate deplasa arealele unor specii, redistribuind resursele piscicole și riscurile economice pentru comunitățile dependente de pescuit",
         "Acidifierea oceanului este mecanismul principal prin care toate speciile comerciale își deplasează arealele către latitudini mai mari",
@@ -1016,7 +1054,6 @@ const battleQuestions = {
       level:"expert",
       battle:"film",
       emoji:"🛳️💎👩‍🦰❤️👨‍🎨🧊💥🌊🚪🥶👋🎻",
-      hint:"FILM EXPERT: toate elementele vizuale trebuie să aparțină aceleiași narațiuni cinematografice.",
       options:[
         "A Night to Remember",
         "Titanic",
@@ -1030,7 +1067,6 @@ const battleQuestions = {
       level:"expert",
       battle:"film",
       emoji:"🌽👨‍🚀🚀🪐🕳️⏳➡️👧➡️👵📚🖐️😭",
-      hint:"FILM EXPERT: diferențiază filmul prin motivele narative: agricultură, relativitate temporală și relația părinte–copil.",
       options:[
         "Contact",
         "Interstellar",
@@ -1044,7 +1080,6 @@ const battleQuestions = {
       level:"expert",
       battle:"film",
       emoji:"🧙‍♂️💍👁️🔥🌋🧌🗡️🦅❓➡️🚶🚶🚶",
-      hint:"FILM EXPERT: identifică filmul care corespunde atât distrugerii Inelului, cât și motivului vulturilor.",
       options:[
         "The Lord of the Rings: The Two Towers",
         "The Lord of the Rings: The Return of the King",
@@ -1061,7 +1096,6 @@ const battleQuestions = {
       level:"expert",
       battle:"history",
       emoji:"🏛️👨‍🦱👑❓➡️🔪🔪🔪🔪🔪👯‍♂️😱📅15/3➡️📜",
-      hint:"ISTORIE EXPERT: data și contextul instituțional sunt decisive.",
       options:[
         "Asasinarea lui Iulius Cezar la Idele lui Marte, în anul 44 î.Hr.",
         "Uciderea lui Pompei în Egipt, în contextul războiului civil roman",
@@ -1075,7 +1109,6 @@ const battleQuestions = {
       level:"expert",
       battle:"history",
       emoji:"🐴🎁➡️🏰🙂🎉🍷🌙➡️🐴🚪➡️🗡️🔥😱",
-      hint:"ISTORIE EXPERT: alege interpretarea care corespunde cel mai exact tradiției narative reprezentate.",
       options:[
         "Legenda Calului Troian, asociată tradiției epice despre căderea Troiei",
         "Cucerirea Babilonului de către perși prin exploatarea unui punct vulnerabil al sistemului defensiv",
@@ -1089,7 +1122,6 @@ const battleQuestions = {
       level:"expert",
       battle:"history",
       emoji:"👑💸📉🍞😡👥➡️🏰💥➡️👑⬇️➡️🪓😬➡️🇫🇷🔄",
-      hint:"ISTORIE EXPERT: emoji-urile comprimă o succesiune de crize economice, politice și instituționale.",
       options:[
         "Revoluția din Iulie 1830 și înlocuirea lui Carol al X-lea cu Ludovic-Filip",
         "Criza financiară a monarhiei și Revoluția Franceză, urmate de desființarea structurilor Vechiului Regim",
@@ -1106,7 +1138,6 @@ const battleQuestions = {
       level:"expert",
       battle:"biology",
       emoji:"🍕➡️👄🦷➡️🧪➡️🩸➡️🧬🏭➡️⚡ATP➡️🫁💨",
-      hint:"BIOLOGIE EXPERT: alege explicația metabolică ce descrie corect relația dintre digestie, absorbție și producerea de ATP.",
       options:[
         "Macromoleculele alimentare sunt hidrolizate, monomerii sunt absorbiți și pot fi oxidați în căi metabolice care contribuie la sinteza de ATP",
         "Digestia eliberează ATP din alimente, iar acesta este absorbit intestinal și distribuit către țesuturi prin sânge",
@@ -1120,7 +1151,6 @@ const battleQuestions = {
       level:"expert",
       battle:"biology",
       emoji:"🦠🔑➡️🚪🧫➡️🧬📥➡️🏭😵‍💫➡️🦠🦠🦠➡️🤧",
-      hint:"BIOLOGIE EXPERT: diferențiază mecanismele de intrare virală, integrare genomică și replicare.",
       options:[
         "Un virus pătrunde într-o celulă și utilizează componente ale mașinăriei celulare pentru replicarea genomului și producerea de noi particule virale",
         "Majoritatea virusurilor își integrează obligatoriu genomul în ADN-ul gazdei înainte ca replicarea să poată începe",
@@ -1134,7 +1164,6 @@ const battleQuestions = {
       level:"expert",
       battle:"biology",
       emoji:"🧬🔍➡️✂️🎯➡️🧬🩹➡️🌱🧪👶❓⚖️",
-      hint:"BIOLOGIE EXPERT: compară implicațiile biologice și etice ale diferitelor forme de editare genetică.",
       options:[
         "CRISPR permite modificări genomice țintite, iar implicațiile biologice și etice diferă între editarea somatică, germinală și intervențiile asupra embrionilor",
         "CRISPR permite modificări genomice țintite, însă editarea germinală este echivalentă biologic cu editarea somatică deoarece efectele nu se transmit descendenților",
@@ -1186,7 +1215,6 @@ const lifelinesWrap = document.getElementById("lifelinesWrap");
 const lifelineBtns = [...document.querySelectorAll(".lifeline")];
 
 const emojiSentence = document.getElementById("emojiSentence");
-const hintEl = document.getElementById("hint");
 const optionsEl = document.getElementById("options");
 const feedbackEl = document.getElementById("feedback");
 const counter = document.getElementById("counter");
@@ -1273,9 +1301,8 @@ function renderQuestion(){
 
   const q = questions[current];
   emojiSentence.textContent = q.emoji;
-  hintEl.textContent = q.hint;
-  const visibleTotal = current < 15 ? 15 : questions.length;
-  const visibleIndex = current < 15 ? current + 1 : current + 1;
+  const visibleTotal = current < 20 ? 20 : questions.length;
+  const visibleIndex = current < 20 ? current + 1 : current + 1;
   counter.textContent = `${visibleIndex} / ${visibleTotal}`;
   progress.style.width = `${(current / visibleTotal) * 100}%`;
   streakEl.textContent = `🔥 Streak: ${streak}`;
@@ -1294,7 +1321,7 @@ function renderQuestion(){
   optionsEl.innerHTML = "";
 
   let renderedOptions = q.options.map((text, index) => ({ text, originalIndex:index }));
-  if(q.level === "expert"){
+  if(q.level === "expert" || q.level === "hard"){
     for(let i = renderedOptions.length - 1; i > 0; i--){
       const j = Math.floor(Math.random() * (i + 1));
       [renderedOptions[i], renderedOptions[j]] = [renderedOptions[j], renderedOptions[i]];
@@ -1474,12 +1501,12 @@ function answer(index){
 
   streakEl.textContent = `🔥 Streak: ${streak}`;
   nextBtn.style.display = "inline-flex";
-  if(current === 14){
+  if(current === 19){
     nextBtn.textContent = "Crezi că ai terminat? 👀";
   } else {
     nextBtn.textContent = current === questions.length - 1 ? "Vezi verdictul 🏆" : "Următoarea ➜";
   }
-  const answerTotal = current < 15 ? 15 : questions.length;
+  const answerTotal = current < 20 ? 20 : questions.length;
   progress.style.width = `${((current + 1) / answerTotal) * 100}%`;
 }
 
@@ -1487,8 +1514,8 @@ function next(){
   if(!answered) return;
   current++;
 
-  // După cele 15 întrebări principale: CHOOSE YOUR BATTLE.
-  if(current === 15 && !surpriseUnlocked){
+  // După cele 20 de întrebări principale: CHOOSE YOUR BATTLE.
+  if(current === 20 && !surpriseUnlocked){
     surpriseUnlocked = true;
     surpriseOverlay.classList.add("show");
     surpriseOverlay.setAttribute("aria-hidden","false");
