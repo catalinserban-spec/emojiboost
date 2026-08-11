@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NARADA Emoji Fluency Test 😎</title>
+  <style>
+    :root{
+      --bg:#fff8f2;
+      --card:#ffffff;
+      --ink:#17202d;
+      --muted:#667085;
+      --primary:#ff5a5f;
+      --primary-dark:#e7464c;
+      --accent:#6c5ce7;
+      --yellow:#ffd166;
+      --green:#23c483;
+      --red:#ef476f;
+      --line:#ece7e1;
+      --soft:#f8f5f1;
+      --shadow:0 18px 50px rgba(24,33,47,.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,209,102,.30), transparent 22%),
+        radial-gradient(circle at 92% 18%, rgba(108,92,231,.18), transparent 20%),
+        linear-gradient(135deg,#fffaf5 0%,#fff4f4 55%,#f8f6ff 100%);
+      color:var(--ink);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px 16px;
+    }
+    .wrap{width:min(980px,100%);position:relative}
+    .brand{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:14px;padding:0 4px;gap:16px
+    }
+    .brand-name{
+      font-size:14px;font-weight:950;letter-spacing:.12em;text-transform:uppercase
+    }
+    .pill{
+      background:rgba(255,255,255,.78);border:1px solid rgba(24,33,47,.08);
+      border-radius:999px;padding:8px 12px;font-size:13px;color:var(--muted);
+      backdrop-filter: blur(8px)
+    }
+    .card{
+      background:rgba(255,255,255,.96);border:1px solid rgba(24,33,47,.06);
+      border-radius:28px;box-shadow:var(--shadow);
+      padding:clamp(24px,5vw,48px);overflow:hidden;position:relative
+    }
+    .blob{position:absolute;border-radius:999px;opacity:.18;pointer-events:none}
+    .blob.a{width:180px;height:180px;background:var(--yellow);top:-80px;right:-60px}
+    .blob.b{width:130px;height:130px;background:var(--accent);bottom:-65px;left:-45px}
+    h1{font-size:clamp(38px,6vw,68px);line-height:.98;margin:0 0 18px;letter-spacing:-.05em}
+    .lead{
+      font-size:clamp(17px,2vw,20px);line-height:1.55;color:var(--muted);
+      max-width:740px;margin:0 auto 28px
+    }
+    .center{text-align:center}
+    .emoji-hero{
+      font-size:clamp(46px,8vw,78px);margin-bottom:18px;
+      filter:drop-shadow(0 8px 18px rgba(0,0,0,.08))
+    }
+    button{font:inherit;border:0;cursor:pointer}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:50px;padding:0 22px;border-radius:14px;font-weight:850;transition:.2s ease
+    }
+    .btn-primary{
+      background:var(--primary);color:#fff;box-shadow:0 10px 24px rgba(255,90,95,.22)
+    }
+    .btn-primary:hover{transform:translateY(-2px);background:var(--primary-dark)}
+    .btn-ghost{background:#f7f5f2;color:var(--ink)}
+    .btn-ghost:hover{background:#efebe5}
+    .btn-wa{background:#25D366;color:#fff;box-shadow:0 10px 24px rgba(37,211,102,.18)}
+    .btn-wa:hover{transform:translateY(-2px);filter:brightness(.96)}
+    .meta-row{
+      display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;
+      color:var(--muted);font-size:14px
+    }
+    .intro-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:720px;margin:24px auto 28px
+    }
+    .intro-chip{
+      background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:16px 14px;
+      text-align:center
+    }
+    .intro-chip b{display:block;font-size:22px;margin-bottom:4px}
+    .intro-chip span{color:var(--muted);font-size:13px}
+    .screen{display:none}
+    .screen.active{display:block}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
+    .progress-shell{height:11px;flex:1;background:#f0ece7;border-radius:999px;overflow:hidden}
+    .progress{
+      height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--yellow),var(--accent));
+      transition:width .35s ease
+    }
+    .counter{min-width:84px;text-align:right;font-weight:850;color:var(--muted);font-size:14px}
+    .status-row{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap
+    }
+    .difficulty{
+      display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;
+      font-size:12px;font-weight:900;letter-spacing:.03em;text-transform:uppercase
+    }
+    .easy{background:#eafaf3;color:#14734e}
+    .medium{background:#fff6d8;color:#8a6700}
+    .hard{background:#fff0f4;color:#a52a4f}
+    .streak{
+      font-size:13px;color:var(--muted);font-weight:800;background:#faf7f2;
+      border:1px solid var(--line);padding:7px 11px;border-radius:999px
+    }
+    .question-label{
+      text-align:center;color:var(--muted);font-weight:850;font-size:13px;
+      text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px
+    }
+    .emoji-sentence{
+      text-align:center;font-size:clamp(42px,8vw,74px);line-height:1.25;
+      padding:8px 8px 20px;min-height:118px;display:flex;align-items:center;
+      justify-content:center;letter-spacing:.055em
+    }
+    .hint{
+      max-width:760px;margin:0 auto 18px;text-align:center;color:#7a7285;
+      font-size:14px;font-style:italic;min-height:21px
+    }
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .option{
+      min-height:76px;border:1.5px solid var(--line);background:#fff;border-radius:18px;
+      padding:16px 18px;text-align:left;font-weight:760;color:var(--ink);
+      transition:.18s ease;line-height:1.38
+    }
+    .option:hover{transform:translateY(-1px);border-color:#cbc3ff;background:#fbfaff}
+    .option.correct{background:#eafaf3;border-color:var(--green);color:#126b48}
+    .option.wrong{background:#fff0f4;border-color:var(--red);color:#9d2146}
+    .option:disabled{cursor:default}
+    .feedback{
+      margin-top:18px;min-height:64px;color:var(--muted);font-weight:700;text-align:center;
+      line-height:1.45
+    }
+    .next-wrap{text-align:center;margin-top:6px}
+    .result-badge{
+      display:inline-flex;align-items:center;gap:8px;padding:9px 14px;background:#f5f2ff;
+      color:#4f3ebd;border-radius:999px;font-weight:900;margin-bottom:16px
+    }
+    .score-ring{
+      --p:0deg;width:190px;height:190px;margin:18px auto 22px;border-radius:50%;
+      display:grid;place-items:center;background:conic-gradient(var(--primary) var(--p), #eee9e3 0deg);
+      position:relative
+    }
+    .score-ring::after{
+      content:"";width:144px;height:144px;border-radius:50%;background:#fff;position:absolute
+    }
+    .score-text{position:relative;z-index:1;text-align:center;font-weight:950;font-size:35px;letter-spacing:-.04em}
+    .score-text small{
+      display:block;font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:3px
+    }
+    .rank{font-size:clamp(30px,4vw,44px);line-height:1.05;margin:10px 0;letter-spacing:-.03em}
+    .rank-desc{max-width:690px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.55}
+    .result-stats{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:620px;margin:24px auto 0
+    }
+    .stat{
+      background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:14px 10px
+    }
+    .stat b{display:block;font-size:24px;margin-bottom:2px}
+    .stat span{font-size:12px;color:var(--muted);font-weight:750}
+    .result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+    .tiny{margin-top:22px;font-size:13px;color:#8a8f98}
+    .confetti{
+      position:fixed;width:10px;height:14px;top:-20px;border-radius:2px;
+      animation:fall 1.9s linear forwards;z-index:50;pointer-events:none
+    }
+    @keyframes fall{to{transform:translate(var(--x),105vh) rotate(720deg);opacity:.95}}
+
+    .lifelines-wrap{
+      margin:18px auto 4px;
+      max-width:820px;
+      padding:14px;
+      border:1px dashed #d7cfca;
+      background:#fffaf5;
+      border-radius:18px;
+      display:none;
+    }
+    .lifelines-wrap.show{display:block}
+    .lifelines-title{
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .lifelines{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .lifeline{
+      min-height:42px;
+      padding:0 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--ink);
+      font-weight:850;
+      transition:.18s ease;
+    }
+    .lifeline:hover{
+      transform:translateY(-1px);
+      border-color:#bdb3ff;
+      background:#faf8ff;
+    }
+    .lifeline.used{
+      opacity:.42;
+      text-decoration:line-through;
+      cursor:not-allowed;
+    }
+    .penalty-chip{
+      display:none;
+      text-align:center;
+      margin:10px auto 0;
+      font-size:13px;
+      font-weight:850;
+      color:#a52a4f;
+    }
+    .penalty-chip.show{display:block}
+    .cheat-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(17,24,39,.48);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:100;
+      backdrop-filter:blur(4px);
+    }
+    .cheat-modal.show{display:flex}
+    .cheat-box{
+      width:min(520px,100%);
+      background:#fff;
+      border-radius:24px;
+      padding:28px;
+      text-align:center;
+      box-shadow:0 28px 80px rgba(0,0,0,.22);
+      animation:pop .18s ease-out;
+    }
+    .cheat-emoji{font-size:58px;margin-bottom:8px}
+
+    .cheat-emoji.red-phone{
+      font-size:64px;
+      line-height:1;
+      filter: drop-shadow(0 8px 18px rgba(239,71,111,.18));
+    }
+
+    .cheat-box h3{
+      margin:0 0 10px;
+      font-size:28px;
+      letter-spacing:-.03em;
+    }
+    .cheat-box p{
+      margin:0 auto 18px;
+      color:var(--muted);
+      line-height:1.5;
+      max-width:420px;
+    }
+    .minus-ten{
+      display:inline-block;
+      margin-bottom:18px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#fff0f4;
+      color:#a52a4f;
+      font-weight:950;
+    }
+    @keyframes pop{
+      from{transform:scale(.94);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
+
+
+    .lifeline-note{
+      text-align:center;
+      margin-top:9px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:750;
+    }
+    .option.eliminated{
+      opacity:.16;
+      transform:none !important;
+      text-decoration:line-through;
+      pointer-events:none;
+      filter:grayscale(1);
+    }
+    .surprise-overlay{
+      position:fixed;
+      inset:0;
+      z-index:150;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:
+        radial-gradient(circle at 30% 20%,rgba(255,209,102,.32),transparent 26%),
+        radial-gradient(circle at 76% 72%,rgba(108,92,231,.32),transparent 27%),
+        rgba(18,24,38,.88);
+      backdrop-filter:blur(8px);
+    }
+    .surprise-overlay.show{display:flex}
+    .surprise-card{
+      width:min(680px,100%);
+      background:#fff;
+      border-radius:30px;
+      padding:clamp(28px,6vw,54px);
+      text-align:center;
+      box-shadow:0 30px 90px rgba(0,0,0,.35);
+      animation:surprisePop .35s cubic-bezier(.2,.8,.2,1);
+    }
+    .surprise-card .big{
+      font-size:clamp(58px,12vw,92px);
+      margin-bottom:12px;
+    }
+    .surprise-card h2{
+      margin:0 0 12px;
+      font-size:clamp(34px,6vw,54px);
+      letter-spacing:-.04em;
+      line-height:.96;
+    }
+    .surprise-card p{
+      margin:0 auto 22px;
+      color:var(--muted);
+      line-height:1.55;
+      max-width:560px;
+      font-size:17px;
+    }
+    .behavior{
+      background:linear-gradient(135deg,#eafaf3,#f5f2ff);
+      color:#31596c;
+    }
+    @keyframes surprisePop{
+      from{opacity:0;transform:scale(.86) rotate(-1deg)}
+      to{opacity:1;transform:scale(1) rotate(0)}
+    }
+
+
+    .assist-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(17,24,39,.52);
+      backdrop-filter:blur(5px);
+      z-index:210;
+    }
+    .assist-modal.show{display:flex}
+    .assist-card{
+      width:min(560px,100%);
+      background:#fff;
+      border-radius:26px;
+      padding:28px;
+      box-shadow:0 28px 90px rgba(0,0,0,.28);
+      text-align:center;
+      animation:pop .18s ease-out;
+    }
+    .assist-icon{
+      font-size:60px;
+      margin-bottom:8px;
+    }
+    .assist-card h3{
+      margin:0 0 10px;
+      font-size:30px;
+      letter-spacing:-.035em;
+    }
+    .assist-card p{
+      margin:0 auto 18px;
+      max-width:470px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .math-box{
+      background:#f8f5f1;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      margin:16px auto;
+      max-width:390px;
+    }
+    .math-expression{
+      font-size:34px;
+      font-weight:950;
+      letter-spacing:-.03em;
+      margin-bottom:12px;
+    }
+    .math-input{
+      width:100%;
+      min-height:50px;
+      border:1.5px solid #d8d2cc;
+      border-radius:13px;
+      padding:0 14px;
+      font:inherit;
+      font-size:18px;
+      text-align:center;
+      outline:none;
+    }
+    .math-input:focus{border-color:var(--accent)}
+    .assist-status{
+      min-height:24px;
+      margin-top:10px;
+      font-weight:850;
+      color:var(--muted);
+    }
+    .assist-actions{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .joker-reveal{
+      margin:18px auto;
+      max-width:470px;
+      padding:18px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#fff6d8,#f5f2ff);
+      border:1px solid #eadfbd;
+      font-weight:850;
+      line-height:1.45;
+    }
+    .joker-warning{
+      font-size:13px;
+      color:#8a6700;
+      font-weight:800;
+      margin-top:8px;
+    }
+    .option.joker-suggested{
+      outline:3px dashed #ffd166;
+      outline-offset:2px;
+      background:#fffaf0;
+    }
+
+
+    .battle-card{
+      width:min(820px,100%);
+      max-height:94vh;
+      overflow:auto;
+    }
+    .battle-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin:24px auto 10px;
+    }
+    .battle-choice{
+      min-height:150px;
+      border:1.5px solid var(--line);
+      background:#fff;
+      border-radius:22px;
+      padding:20px 16px;
+      color:var(--ink);
+      text-align:center;
+      transition:.2s ease;
+      box-shadow:0 8px 24px rgba(24,33,47,.05);
+    }
+    .battle-choice:hover{
+      transform:translateY(-4px) rotate(-.3deg);
+      border-color:#bbb0ff;
+      box-shadow:0 14px 32px rgba(24,33,47,.10);
+      background:#fcfbff;
+    }
+    .battle-choice.history-choice:hover{
+      transform:translateY(-4px) rotate(1deg);
+    }
+    .battle-icon{
+      display:block;
+      font-size:40px;
+      margin-bottom:9px;
+    }
+    .battle-choice strong{
+      display:block;
+      font-size:20px;
+      margin-bottom:6px;
+    }
+    .battle-choice small{
+      display:block;
+      color:var(--muted);
+      line-height:1.4;
+      font-size:13px;
+    }
+    .battle-footnote{
+      margin-top:14px;
+      color:#8a8f98;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .battle-transition{
+      position:fixed;
+      inset:0;
+      z-index:300;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      background:rgba(15,19,30,.96);
+      color:#fff;
+    }
+    .battle-transition.show{display:flex}
+    .battle-transition-center{
+      position:relative;
+      z-index:4;
+      text-align:center;
+      width:min(760px,88vw);
+      padding:30px;
+      text-shadow:0 10px 35px rgba(0,0,0,.45);
+      animation:battleZoom .55s cubic-bezier(.2,.8,.2,1);
+    }
+    .battle-transition-icon{
+      font-size:clamp(72px,14vw,130px);
+      margin-bottom:10px;
+    }
+    .battle-transition-title{
+      font-size:clamp(34px,8vw,74px);
+      font-weight:1000;
+      letter-spacing:-.055em;
+      line-height:.9;
+    }
+    .battle-transition-subtitle{
+      margin-top:14px;
+      font-size:clamp(15px,2.2vw,22px);
+      font-weight:800;
+      opacity:.85;
+    }
+    .emoji-avalanche{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:2;
+      pointer-events:none;
+    }
+    .avalanche-emoji{
+      position:absolute;
+      top:-15vh;
+      animation:emojiAvalancheFall var(--duration) cubic-bezier(.15,.7,.2,1) forwards;
+      animation-delay:var(--delay);
+      filter:drop-shadow(0 7px 12px rgba(0,0,0,.28));
+      will-change:transform,opacity;
+    }
+    @keyframes emojiAvalancheFall{
+      0%{
+        transform:translate3d(0,-15vh,0) rotate(0deg) scale(.6);
+        opacity:0;
+      }
+      12%{opacity:1}
+      100%{
+        transform:translate3d(var(--drift),125vh,0) rotate(var(--spin)) scale(1.35);
+        opacity:1;
+      }
+    }
+    @keyframes battleZoom{
+      from{opacity:0;transform:scale(.75)}
+      to{opacity:1;transform:scale(1)}
+    }
+
+    .difficulty.expert{
+      background:linear-gradient(135deg,#f5f2ff,#fff0f4);
+      color:#5b3cb8;
+    }
+
+    @media (max-width:700px){
+      .battle-grid{grid-template-columns:1fr}
+      .battle-choice{min-height:122px}
+    }
+
+    @media (max-width:700px){
+      .options{grid-template-columns:1fr}
+      .intro-grid{grid-template-columns:1fr}.result-stats{grid-template-columns:1fr 1fr}
+      .card{border-radius:22px}
+      .emoji-sentence{min-height:100px}
+      .brand{align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand">
+      <div class="brand-name">NARADA ✦ Emoji Academy</div>
+      <div class="pill">Test neoficial. Verdict foarte oficial. 😌</div>
+    </div>
+
+    <section class="card">
+      <div class="blob a"></div>
+      <div class="blob b"></div>
+
+      <div id="startScreen" class="screen active center">
+        <div class="emoji-hero">🧠💬👀🫠🔥</div>
+        <h1>Cât de fluent ești în limba emoji?</h1>
+        <p class="lead">
+          De la „☕ = cafea” până la teritoriul periculos în care 👀, 🙂 și 💀
+          înseamnă lucruri complet diferite în funcție de context.
+        </p>
+
+        <div class="intro-grid">
+          <div class="intro-chip"><b>15 + ?</b><span>întrebări 👀</span></div>
+          <div class="intro-chip"><b>~10 min</b><span>de decoding</span></div>
+          <div class="intro-chip"><b>3 niveluri</b><span>de dificultate</span></div>
+        </div>
+
+        <button id="startBtn" class="btn btn-primary">Accept provocarea 🚀</button>
+        <div class="meta-row">
+          <span>Easy → Medium → Hard → ??? 👀</span>
+          <span>•</span>
+          <span>La final primești rangul NARADA</span>
+        </div>
+      </div>
+
+      <div id="quizScreen" class="screen">
+        <div class="topbar">
+          <div class="progress-shell"><div id="progress" class="progress"></div></div>
+          <div id="counter" class="counter">1 / 15</div>
+        </div>
+
+        <div class="status-row">
+          <div id="difficulty" class="difficulty easy">🌱 Easy</div>
+          <div id="streak" class="streak">🔥 Streak: 0</div>
+        </div>
+
+        <div class="question-label">Ce transmite mesajul?</div>
+        <div id="emojiSentence" class="emoji-sentence">☕💻😵‍💫</div>
+        <div id="hint" class="hint"></div>
+        <div id="options" class="options"></div>
+
+        <div id="lifelinesWrap" class="lifelines-wrap">
+          <div class="lifelines-title">Ajutoare speciale 🎮</div>
+          <div class="lifelines">
+            <button type="button" class="lifeline" data-help="fifty">✂️ 50:50 + mini-mate</button>
+            <button type="button" class="lifeline" data-help="joker">🎲 Joker</button>
+          </div>
+          <div class="lifeline-note">
+            50:50 elimină două variante, dar trebuie să rezolvi întâi o problemă de mate.
+            Jokerul îți recomandă o variantă — are 50% șansă să fie corectă și 50% să fie o capcană. 😈
+          </div>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+        <div class="next-wrap">
+          <button id="nextBtn" class="btn btn-primary" style="display:none">Următoarea ➜</button>
+        </div>
+      </div>
+
+      <div id="resultScreen" class="screen center">
+        <div class="result-badge">🏆 Verdict Emoji Academy</div>
+
+        <div id="scoreRing" class="score-ring">
+          <div class="score-text">
+            <span id="scorePercent">0%</span>
+            <small>fluență emoji</small>
+          </div>
+        </div>
+
+        <h2 id="rankTitle" class="rank">Emoji Rookie 🌱</h2>
+        <p id="rankDesc" class="rank-desc"></p>
+
+        <div class="result-stats">
+          <div class="stat"><b id="correctStat">0/15</b><span>răspunsuri corecte</span></div>
+          <div class="stat"><b id="bestStreakStat">0🔥</b><span>best streak</span></div>
+          <div class="stat"><b id="hardStat">0/5</b><span>hard mode</span></div>
+          <div class="stat"><b id="penaltyStat">0/2</b><span>ajutoare folosite 🎮</span></div>
+        </div>
+
+        <div class="result-actions">
+          <button id="waBtn" class="btn btn-wa">Share pe WhatsApp 💚</button>
+          <button id="copyBtn" class="btn btn-ghost">Copiază rezultatul 📋</button>
+          <button id="restartBtn" class="btn btn-primary">Mai încerc o dată 🔁</button>
+        </div>
+
+        <div class="tiny">PS: 100% = ai dreptul moral să răspunzi la un thread doar cu 👀🔥✅.</div>
+      </div>
+    </section>
+  </main>
+
+<div id="surpriseOverlay" class="surprise-overlay" aria-hidden="true">
+  <div class="surprise-card battle-card">
+    <div class="big">⚔️🎲💥🧠</div>
+    <h2>CHOOSE YOUR BATTLE</h2>
+    <p>
+      Credeai că ai terminat? Adorabil. 😌<br>
+      Alege domeniul în care vrei să-ți pui reputația de interpret profesionist de emoji-uri în pericol.
+      Fiecare cale are <strong>3 întrebări Expert Mode</strong>.
+    </p>
+
+    <div class="battle-grid">
+      <button type="button" class="battle-choice" data-battle="geography">
+        <span class="battle-icon">🌍🗺️🌋</span>
+        <strong>Geografie</strong>
+        <small>Continente, climă și un vulcan care îți anulează zborul.</small>
+      </button>
+
+      <button type="button" class="battle-choice" data-battle="film">
+        <span class="battle-icon">🎬🍿🎞️</span>
+        <strong>Film</strong>
+        <small>IMDb, dar cineva a șters toate cuvintele.</small>
+      </button>
+
+      <button type="button" class="battle-choice history-choice" data-battle="history">
+        <span class="battle-icon">🏺⚔️👑</span>
+        <strong>Istorie</strong>
+        <small>Oamenii din trecut au luat niște decizii… discutabile.</small>
+      </button>
+
+      <button type="button" class="battle-choice" data-battle="biology">
+        <span class="battle-icon">🧬🦠🔬</span>
+        <strong>Biologie</strong>
+        <small>Celulele au procese mai complicate decât organigrama ta.</small>
+      </button>
+    </div>
+
+    <div class="battle-footnote">⚠️ Nu există „alegere ușoară”. Doar forme diferite de regret.</div>
+    <div style="margin-top:16px">
+      <button type="button" id="skipBattleBtn" class="btn btn-ghost">Fug de Expert Mode 🏃‍♀️💨</button>
+    </div>
+  </div>
+</div>
+
+<div id="battleTransition" class="battle-transition" aria-hidden="true">
+  <div id="emojiAvalanche" class="emoji-avalanche"></div>
+  <div class="battle-transition-center">
+    <div id="battleTransitionIcon" class="battle-transition-icon">🌍</div>
+    <div id="battleTransitionTitle" class="battle-transition-title">GEOGRAFIE</div>
+    <div id="battleTransitionSubtitle" class="battle-transition-subtitle">Continentele vin peste tine.</div>
+  </div>
+</div>
+
+<div id="assistModal" class="assist-modal" aria-hidden="true">
+    <div class="assist-card">
+      <div id="assistIcon" class="assist-icon">✂️</div>
+      <h3 id="assistTitle">50:50</h3>
+      <p id="assistText"></p>
+
+      <div id="mathChallenge" class="math-box" style="display:none">
+        <div id="mathExpression" class="math-expression">8 × 4 + 3 = ?</div>
+        <input id="mathAnswer" class="math-input" inputmode="numeric" autocomplete="off" placeholder="Scrie rezultatul" />
+        <div id="mathStatus" class="assist-status"></div>
+        <div class="assist-actions">
+          <button type="button" id="checkMathBtn" class="btn btn-primary">Verifică 🧮</button>
+        </div>
+      </div>
+
+      <div id="jokerReveal" class="joker-reveal" style="display:none"></div>
+
+      <div class="assist-actions">
+        <button type="button" id="closeAssistBtn" class="btn btn-primary">Ok, merg mai departe 😎</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+const questions = [
+  {
+    level:"easy",
+    emoji:"☕💻😵‍💫",
+    hint:"Context: prima parte a zilei.",
+    options:[
+      "Lucrez de prea mult timp și am nevoie de cafea",
+      "Laptopul meu a băut cafeaua",
+      "Am terminat tot și plec acasă",
+      "Cafeaua mi-a stricat calculatorul"
+    ],
+    correct:0,
+    feedback:"Perfect. Asta e aproape limbaj internațional de birou: cafea + laptop + creier topit."
+  },
+  {
+    level:"easy",
+    emoji:"👀📩⏳",
+    hint:"Context: ai trimis ceva important.",
+    options:[
+      "Îmi verific vederea la optometrist",
+      "Aștept un răspuns la mesaj",
+      "Am prea multe mailuri necitite",
+      "Șterg inboxul încet"
+    ],
+    correct:1,
+    feedback:"Da. 👀 aici nu înseamnă doar „văd”, ci „urmăresc / aștept / sunt atent”."
+  },
+  {
+    level:"easy",
+    emoji:"🎉✅💪",
+    hint:"Context: final de task.",
+    options:[
+      "Task terminat. Victorie.",
+      "Merg la sală după petrecere",
+      "Am bifat că vin la eveniment",
+      "Trebuie să ridic ceva greu"
+    ],
+    correct:0,
+    feedback:"Corect. Finalizat + celebrat + sentiment de „we did it”."
+  },
+  {
+    level:"easy",
+    emoji:"📅⏰🏃‍♀️💨",
+    hint:"Context: ai un meeting în calendar.",
+    options:[
+      "Calendarul spune că trebuia deja să fiu acolo",
+      "Am timp suficient, merg liniștit",
+      "Fac sport între două meetinguri",
+      "Îmi anulez toate întâlnirile"
+    ],
+    correct:0,
+    feedback:"Exact. Traducere liberă: „vin acum, nu începeți fără mine”."
+  },
+  {
+    level:"easy",
+    emoji:"🧠💡🚀",
+    hint:"Context: brainstorm.",
+    options:[
+      "Am o idee și vreau s-o punem rapid în mișcare",
+      "Îmi imaginez o vacanță în spațiu",
+      "Trebuie să schimb becul",
+      "Avem nevoie de o rachetă"
+    ],
+    correct:0,
+    feedback:"Da. Concept → idee bună → lansare. Foarte pitch-deck energy."
+  },
+
+  {
+    level:"medium",
+    emoji:"🙂👍",
+    hint:"Context: răspuns scurt într-un chat de lucru.",
+    options:[
+      "Sunt extrem de entuziasmat",
+      "Am văzut, e în regulă / noted",
+      "Sunt furios",
+      "Nu am înțeles nimic"
+    ],
+    correct:1,
+    feedback:"Aici contextul contează: 🙂👍 e adesea confirmare politicoasă, nu neapărat extaz."
+  },
+  {
+    level:"medium",
+    emoji:"👀🔥",
+    hint:"Context: cineva postează o idee sau un teaser.",
+    options:[
+      "Este literalmente un incendiu",
+      "Mă uit atent, pare foarte interesant",
+      "Nu vreau să văd asta",
+      "Am nevoie de ochelari"
+    ],
+    correct:1,
+    feedback:"Exact. 👀 poate însemna „sunt atent / intrigued”, iar 🔥 amplifică entuziasmul."
+  },
+  {
+    level:"medium",
+    emoji:"💀😂",
+    hint:"Context: cineva spune ceva foarte amuzant.",
+    options:[
+      "Este o situație tragică",
+      "Mor de râs",
+      "E un film horror",
+      "Gluma a fost prea slabă"
+    ],
+    correct:1,
+    feedback:"Da. 💀 în slang digital poate însemna „m-ai omorât de râs”, nu moarte literală."
+  },
+  {
+    level:"medium",
+    emoji:"🫡✅",
+    hint:"Context: primești o sarcină.",
+    options:[
+      "Am înțeles, mă ocup",
+      "Refuz politicos",
+      "Nu știu ce am de făcut",
+      "Cer concediu"
+    ],
+    correct:0,
+    feedback:"Corect. 🫡 transmite „roger that / understood / on it”."
+  },
+  {
+    level:"medium",
+    emoji:"🤡📅",
+    hint:"Context: ți-ai pus singur prea multe lucruri în calendar.",
+    options:[
+      "Am un eveniment de circ",
+      "Mi-am făcut singur programul absurd și acum suport consecințele",
+      "Calendarul arată foarte colorat",
+      "Trebuie să invit un entertainer"
+    ],
+    correct:1,
+    feedback:"Exact. 🤡 poate fi auto-ironie: „da, eu mi-am făcut asta”."
+  },
+
+  {
+    level:"hard",
+    emoji:"🫠👍",
+    hint:"Context: cineva tocmai schimbă deadline-ul în mai devreme.",
+    options:[
+      "Super, ador schimbarea",
+      "Sigur… mă descurc… cumva",
+      "Nu am nicio emoție",
+      "Nu am văzut mesajul"
+    ],
+    correct:1,
+    feedback:"Hard mode activat. 🫠 + 👍 este adesea resemnare politicoasă: „ok… sigur…”."
+  },
+  {
+    level:"hard",
+    emoji:"👁️👄👁️",
+    hint:"Context: ai citit ceva neașteptat într-un chat.",
+    options:[
+      "Sunt complet neutru",
+      "Sunt fără cuvinte / uimit într-un mod awkward",
+      "Îmi fac un selfie",
+      "Cer să vorbim față în față"
+    ],
+    correct:1,
+    feedback:"Da. Combinația asta transmite adesea șoc tăcut, awkwardness sau „ce tocmai am citit?”."
+  },
+  {
+    level:"hard",
+    emoji:"📉🙂",
+    hint:"Context: ai văzut rezultatele unei campanii.",
+    options:[
+      "Rezultatele au scăzut, dar încerc să rămân civilizat",
+      "Rezultatele au crescut",
+      "Nu mă interesează rezultatele",
+      "Este un grafic decorativ"
+    ],
+    correct:0,
+    feedback:"Corect. 🙂 poate masca disconfortul — un exemplu bun de contrast emoțional în digital."
+  },
+  {
+    level:"hard",
+    emoji:"🧍‍♀️🧍‍♂️🧍👀📱",
+    hint:"Context: un grup stă împreună, dar fiecare e pe telefon.",
+    options:[
+      "Socializare modernă: împreună fizic, separat digital",
+      "Facem o fotografie de grup",
+      "Toată lumea citește aceeași știre",
+      "Așteptăm un taxi"
+    ],
+    correct:0,
+    feedback:"Exact. Aici sensul vine din relația dintre simboluri, nu dintr-un singur emoji."
+  },
+  {
+    level:"hard",
+    emoji:"❤️‍🔥🧠🤝🌍",
+    hint:"Context: mesaj despre o echipă și misiunea ei.",
+    options:[
+      "Pasiune + idei + colaborare + impact",
+      "Dragoste la distanță",
+      "Un workshop despre geografie",
+      "Prea multe meetinguri internaționale"
+    ],
+    correct:0,
+    feedback:"Final boss defeated. Aici emoji-urile funcționează aproape ca o propoziție conceptuală."
+  }
+];
+
+
+const battleQuestions = {
+  geography: [
+    {
+      level:"expert",
+      battle:"geography",
+      emoji:"🇮🇸🌋💥☁️➡️✈️🚫🌍😡🧳🥪",
+      hint:"GEOGRAFIE EXPERT: un vulcan islandez + un nor foarte nepopular + milioane de oameni uitându-se nervos la panoul de plecări.",
+      options:[
+        "Erupția Eyjafjallajökull din 2010, care a perturbat masiv traficul aerian european",
+        "Islanda a decis să interzică avioanele ca să protejeze puffinii",
+        "Un nor obișnuit care și-a luat jobul mult prea în serios",
+        "Prima ediție low-cost a «Stăpânului Inelelor», filmată lângă Reykjavik"
+      ],
+      correct:0,
+      feedback:"Da. Eyjafjallajökull. Dacă poți și să-l pronunți, primești imaginar încă 40 de puncte și cetățenie onorifică islandeză. 🌋"
+    },
+    {
+      level:"expert",
+      battle:"geography",
+      emoji:"🧊🏔️☀️⬆️➡️💧➡️🌊⬆️➡️🏝️😬➡️🧳",
+      hint:"GEOGRAFIE EXPERT: urmărește lanțul. Nu, 🧳 nu înseamnă city-break.",
+      options:[
+        "Topirea gheții continentale poate contribui la creșterea nivelului mării și la presiuni asupra comunităților insulare",
+        "Munții se topesc și se transformă direct în insule tropicale",
+        "Oamenii pleacă în vacanță pentru că e prea mult soare pe ghețari",
+        "Apa din oceane urcă fiindcă peștii înoată prea energic"
+      ],
+      correct:0,
+      feedback:"Corect. 🧳 de la final e partea deloc amuzantă: mobilitate și strămutare. Restul emoji-urilor au făcut practic un mini-raport climatic."
+    },
+    {
+      level:"expert",
+      battle:"geography",
+      emoji:"🌊🔥➡️🐟🧭❄️⬆️➡️🎣❓➡️🍽️📉➡️👥😵‍💫",
+      hint:"GEOGRAFIE EXPERT: oceanul se încălzește. Peștii își schimbă adresa fără să lase forwarding address.",
+      options:[
+        "Speciile marine își pot deplasa arealul spre ape mai reci, afectând pescuitul și securitatea alimentară locală",
+        "Peștii au inventat migrația fiscală spre nord",
+        "Toate speciile marine se mută automat la Polul Nord în fiecare vară",
+        "Pescarii trebuie doar să cumpere undițe mai lungi"
+      ],
+      correct:0,
+      feedback:"Exact. Ecologia marină + economie + geografie umană într-un singur șir. Peștele: «new ocean, who dis?» 🐟📱"
+    }
+  ],
+
+  film: [
+    {
+      level:"expert",
+      battle:"film",
+      emoji:"🛳️💎👩‍🦰❤️👨‍🎨🧊💥🌊🚪🥶👋🎻",
+      hint:"FILM EXPERT: dacă discuția ajunge la dimensiunea ușii, ai identificat deja universul cinematografic.",
+      options:[
+        "Titanic",
+        "Frozen: Varianta cu asigurare maritimă",
+        "The Notebook, dar caietul a căzut în Atlantic",
+        "Finding Nemo: Director’s Cut foarte deprimant"
+      ],
+      correct:0,
+      feedback:"Titanic. Și da, internetul încă face audit tehnic la ușa aia. 🚪📐👀"
+    },
+    {
+      level:"expert",
+      battle:"film",
+      emoji:"🌽👨‍🚀🚀🪐🕳️⏳➡️👧➡️👵📚🖐️😭",
+      hint:"FILM EXPERT: porumb + relativitatea timpului + parenting la o distanță absolut rezonabilă de câteva galaxii.",
+      options:[
+        "Interstellar",
+        "The Martian, dacă Matt Damon ar fi cultivat doar porumb",
+        "Back to the Future 4: Fermierul Cosmic",
+        "Gravity, dar cu bibliotecă și probleme familiale"
+      ],
+      correct:0,
+      feedback:"Interstellar. Singurul film în care «ajung puțin mai târziu» poate însemna câteva decenii. ⏳😬"
+    },
+    {
+      level:"expert",
+      battle:"film",
+      emoji:"🧙‍♂️💍👁️🔥🌋🧌🗡️🦅❓➡️🚶🚶🚶",
+      hint:"FILM EXPERT: inel, vulcan și întrebarea eternă pe care internetul refuză să o lase să moară.",
+      options:[
+        "The Lord of the Rings și inevitabila întrebare «de ce n-au mers cu vulturii?»",
+        "Harry Potter își pierde verigheta în excursie",
+        "Game of Thrones: aeroportul din Mordor",
+        "Un documentar despre bijuterii vulcanice și păsări mari"
+      ],
+      correct:0,
+      feedback:"LOTR. 🦅❓ este practic secțiunea de comentarii a internetului din ultimii 20+ ani."
+    }
+  ],
+
+  history: [
+    {
+      level:"expert",
+      battle:"history",
+      emoji:"🏛️👨‍🦱👑❓➡️🔪🔪🔪🔪🔪👯‍♂️😱📅15/3➡️📜",
+      hint:"ISTORIE EXPERT: Senatul Roman. Team-building-ul a mers foarte prost.",
+      options:[
+        "Asasinarea lui Iulius Cezar la Idele lui Marte",
+        "Un masterclass roman de gătit în care toată lumea a adus cuțite",
+        "Cezar pierde un vot intern și HR-ul escaladează nejustificat",
+        "Fondarea oficială a salatei Caesar"
+      ],
+      correct:0,
+      feedback:"Corect. Idele lui Marte. Probabil cel mai prost moment din istorie să spui «hai să intrăm puțin în Senat, ce se poate întâmpla?». 🏛️🙂"
+    },
+    {
+      level:"expert",
+      battle:"history",
+      emoji:"🐴🎁➡️🏰🙂🎉🍷🌙➡️🐴🚪➡️🗡️🔥😱",
+      hint:"ISTORIE EXPERT: când primești un cal gigantic cadou și absolut nimeni nu întreabă «dar de ce?»",
+      options:[
+        "Calul Troian și căderea Troiei în tradiția epică",
+        "Prima livrare prin curier din Antichitate",
+        "Un festival ecvestru care a scăpat puțin de sub control",
+        "Black Friday în Troia: retururile nu erau acceptate"
+      ],
+      correct:0,
+      feedback:"Da. Lecția eternă: dacă dușmanul îți lasă un cal uriaș la poartă, poate nu-l parchezi în sufragerie. 🐴🏠"
+    },
+    {
+      level:"expert",
+      battle:"history",
+      emoji:"👑💸📉🍞😡👥➡️🏰💥➡️👑⬇️➡️🪓😬➡️🇫🇷🔄",
+      hint:"ISTORIE EXPERT: economie, pâine, furie colectivă și un final care nu trece de standardele moderne de HR.",
+      options:[
+        "Revoluția Franceză și prăbușirea Vechiului Regim",
+        "Franța schimbă furnizorul de panificație",
+        "Un reality show regal anulat după primul sezon",
+        "Napoleon pierde o rezervare la restaurant și reacționează disproporționat"
+      ],
+      correct:0,
+      feedback:"Revoluția Franceză. 🪓 este aici rezumat istoric, nu recomandare de management al performanței. 🇫🇷"
+    }
+  ],
+
+  biology: [
+    {
+      level:"expert",
+      battle:"biology",
+      emoji:"🍕➡️👄🦷➡️🧪➡️🩸➡️🧬🏭➡️⚡ATP➡️🫁💨",
+      hint:"BIOLOGIE EXPERT: pizza intră. ATP iese. Corpul tău conduce un startup energetic fără să-ți ceară voie.",
+      options:[
+        "Digestia furnizează molecule care pot fi folosite în metabolism și respirație celulară pentru producerea de ATP",
+        "Pizza se transformă direct în electricitate în stomac",
+        "Plămânii digeră carbohidrații și îi exportă ca Wi-Fi",
+        "ATP este toppingul secret pe care pizzeria nu îl trece în meniu"
+      ],
+      correct:0,
+      feedback:"Corect. Corpul tău: «mulțumesc pentru pizza, o convertesc acum într-o serie absolut absurdă de reacții biochimice». 🍕⚙️"
+    },
+    {
+      level:"expert",
+      battle:"biology",
+      emoji:"🦠🔑➡️🚪🧫➡️🧬📥➡️🏭😵‍💫➡️🦠🦠🦠➡️🤧",
+      hint:"BIOLOGIE EXPERT: musafirul nu doar că nu pleacă, dar îți folosește bucătăria ca să-și invite 8.000 de rude.",
+      options:[
+        "Un virus intră într-o celulă și folosește mecanismele ei pentru replicare",
+        "O bacterie își deschide o franciză",
+        "Celula descarcă voluntar un update de software",
+        "Sistemul imunitar face networking"
+      ],
+      correct:0,
+      feedback:"Exact. Virusul: «frumos aparat de sinteză proteică ai aici… ar fi păcat să-l folosesc pentru mine». 🦠😌"
+    },
+    {
+      level:"expert",
+      battle:"biology",
+      emoji:"🧬🔍➡️✂️🎯➡️🧬🩹➡️🌱🧪👶❓⚖️",
+      hint:"BIOLOGIE EXPERT: foarfecă moleculară + țintă genetică + partea în care bioetica intră în cameră și spune «bună seara».",
+      options:[
+        "Editare genetică de tip CRISPR și întrebările etice legate de utilizările ei",
+        "ADN-ul merge la croitor pentru ajustări",
+        "Selecția naturală folosește foarfece reale",
+        "O plantă completează formularul GDPR pentru propriul genom"
+      ],
+      correct:0,
+      feedback:"CRISPR. Știința: «putem edita». Etica: «stai puțin, CE edităm, DE CE și CINE decide?». 🧬⚖️"
+    }
+  ]
+};
+
+const battleMeta = {
+  geography:{
+    label:"GEOGRAFIE",
+    icon:"🌍🗺️🌋",
+    subtitle:"CONTINENTELE VIN PESTE TINE.",
+    emojis:["🌍","🗺️","🌋","🌊","🧊","🏔️","🏝️","🧭","✈️","🌪️","☀️","🐟"]
+  },
+  film:{
+    label:"FILM",
+    icon:"🎬🍿🎞️",
+    subtitle:"ROLL CAMERA. PANIC.",
+    emojis:["🎬","🍿","🎞️","🎥","⭐","🚪","💍","🚀","🧙‍♂️","🛳️","🕳️","😭"]
+  },
+  history:{
+    label:"ISTORIE",
+    icon:"🏺⚔️👑",
+    subtitle:"TRECUTUL NU TE-A UITAT.",
+    emojis:["🏺","⚔️","👑","🏛️","🐴","🔪","📜","🪓","🍞","🔥","😱","🇫🇷"]
+  },
+  biology:{
+    label:"BIOLOGIE",
+    icon:"🧬🦠🔬",
+    subtitle:"CELULELE CER SĂ VORBEASCĂ CU MANAGERUL.",
+    emojis:["🧬","🦠","🔬","🧫","🫁","🧠","⚡","🧪","🩸","🌱","✂️","🤧"]
+  }
+};
+
+const startScreen = document.getElementById("startScreen");
+const quizScreen = document.getElementById("quizScreen");
+const resultScreen = document.getElementById("resultScreen");
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const restartBtn = document.getElementById("restartBtn");
+const copyBtn = document.getElementById("copyBtn");
+const waBtn = document.getElementById("waBtn");
+const lifelinesWrap = document.getElementById("lifelinesWrap");
+const lifelineBtns = [...document.querySelectorAll(".lifeline")];
+
+const emojiSentence = document.getElementById("emojiSentence");
+const hintEl = document.getElementById("hint");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const counter = document.getElementById("counter");
+const progress = document.getElementById("progress");
+const difficultyEl = document.getElementById("difficulty");
+const streakEl = document.getElementById("streak");
+
+const scorePercent = document.getElementById("scorePercent");
+const scoreRing = document.getElementById("scoreRing");
+const rankTitle = document.getElementById("rankTitle");
+const rankDesc = document.getElementById("rankDesc");
+const correctStat = document.getElementById("correctStat");
+const bestStreakStat = document.getElementById("bestStreakStat");
+const hardStat = document.getElementById("hardStat");
+const penaltyStat = document.getElementById("penaltyStat");
+const assistModal = document.getElementById("assistModal");
+const assistIcon = document.getElementById("assistIcon");
+const assistTitle = document.getElementById("assistTitle");
+const assistText = document.getElementById("assistText");
+const mathChallenge = document.getElementById("mathChallenge");
+const mathExpression = document.getElementById("mathExpression");
+const mathAnswer = document.getElementById("mathAnswer");
+const mathStatus = document.getElementById("mathStatus");
+const checkMathBtn = document.getElementById("checkMathBtn");
+const jokerReveal = document.getElementById("jokerReveal");
+const closeAssistBtn = document.getElementById("closeAssistBtn");
+const surpriseOverlay = document.getElementById("surpriseOverlay");
+const battleTransition = document.getElementById("battleTransition");
+const emojiAvalanche = document.getElementById("emojiAvalanche");
+const battleTransitionIcon = document.getElementById("battleTransitionIcon");
+const battleTransitionTitle = document.getElementById("battleTransitionTitle");
+const battleTransitionSubtitle = document.getElementById("battleTransitionSubtitle");
+const skipBattleBtn = document.getElementById("skipBattleBtn");
+
+let current = 0;
+let score = 0;
+let answered = false;
+let streak = 0;
+let bestStreak = 0;
+let hardCorrect = 0;
+let helpCount = 0;
+let activeMathAnswer = null;
+let usedHelps = new Set();
+let surpriseUnlocked = false;
+let selectedBattle = null;
+
+function switchScreen(show){
+  [startScreen, quizScreen, resultScreen].forEach(el => el.classList.remove("active"));
+  show.classList.add("active");
+}
+
+function levelLabel(level, q){
+  if(level === "easy") return ["🌱 Easy","difficulty easy"];
+  if(level === "medium") return ["🧠 Medium","difficulty medium"];
+  if(level === "hard") return ["🔥 Hard","difficulty hard"];
+  const label = q && q.battle ? battleMeta[q.battle].label : "EXPERT";
+  return [`⚔️ EXPERT · ${label}`,"difficulty expert"];
+}
+
+function startQuiz(){
+  current = 0;
+  score = 0;
+  answered = false;
+  streak = 0;
+  bestStreak = 0;
+  hardCorrect = 0;
+  helpCount = 0;
+  activeMathAnswer = null;
+  usedHelps = new Set();
+  surpriseUnlocked = false;
+  selectedBattle = null;
+  document.querySelectorAll(".lifeline[data-help]").forEach(btn => {
+    btn.disabled = false;
+    btn.classList.remove("used");
+  });
+  switchScreen(quizScreen);
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  nextBtn.style.display = "none";
+  feedbackEl.textContent = "";
+
+  const q = questions[current];
+  emojiSentence.textContent = q.emoji;
+  hintEl.textContent = q.hint;
+  const visibleTotal = current < 15 ? 15 : questions.length;
+  const visibleIndex = current < 15 ? current + 1 : current + 1;
+  counter.textContent = `${visibleIndex} / ${visibleTotal}`;
+  progress.style.width = `${(current / visibleTotal) * 100}%`;
+  streakEl.textContent = `🔥 Streak: ${streak}`;
+
+  // Ajutoarele apar de la întrebarea 6, când testul începe să devină suspect de serios.
+  if(current >= 5 && q.level !== "expert"){
+    lifelinesWrap.classList.add("show");
+  } else {
+    lifelinesWrap.classList.remove("show");
+  }
+
+  const [label, cls] = levelLabel(q.level, q);
+  difficultyEl.textContent = label;
+  difficultyEl.className = cls;
+
+  optionsEl.innerHTML = "";
+  q.options.forEach((text, index) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = text;
+    btn.addEventListener("click", () => answer(index));
+    optionsEl.appendChild(btn);
+  });
+}
+
+
+
+const mathChallenges = [
+  { text:"7 × 4 + 5", answer:33 },
+  { text:"48 ÷ 6 + 9", answer:17 },
+  { text:"9 × 3 - 8", answer:19 },
+  { text:"(12 + 6) ÷ 3", answer:6 },
+  { text:"5 × 5 + 7", answer:32 },
+  { text:"64 ÷ 8 + 11", answer:19 }
+];
+
+function openAssist(){
+  assistModal.classList.add("show");
+  assistModal.setAttribute("aria-hidden","false");
+}
+
+function closeAssist(){
+  assistModal.classList.remove("show");
+  assistModal.setAttribute("aria-hidden","true");
+  mathAnswer.value = "";
+  mathStatus.textContent = "";
+}
+
+function markHelpUsed(type){
+  usedHelps.add(type);
+  helpCount++;
+  const btn = document.querySelector(`.lifeline[data-help="${type}"]`);
+  if(btn){
+    btn.disabled = true;
+    btn.classList.add("used");
+  }
+}
+
+function activateFiftyFifty(){
+  const q = questions[current];
+  const buttons = [...optionsEl.querySelectorAll(".option")];
+  const wrongIndexes = q.options
+    .map((_, i) => i)
+    .filter(i => i !== q.correct);
+
+  for(let i = wrongIndexes.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [wrongIndexes[i], wrongIndexes[j]] = [wrongIndexes[j], wrongIndexes[i]];
+  }
+
+  wrongIndexes.slice(0, 2).forEach(i => {
+    buttons[i].classList.add("eliminated");
+    buttons[i].disabled = true;
+  });
+
+  markHelpUsed("fifty");
+}
+
+function useFiftyFifty(){
+  if(answered || usedHelps.has("fifty")) return;
+
+  const challenge = mathChallenges[Math.floor(Math.random() * mathChallenges.length)];
+  activeMathAnswer = challenge.answer;
+
+  assistIcon.textContent = "✂️🧮";
+  assistTitle.textContent = "Deblochează 50:50";
+  assistText.textContent = "Vrei să-ți reducem șansele de haos cu 50%? Întâi dovedește că emoji-urile nu ți-au distrus complet matematica.";
+  mathChallenge.style.display = "block";
+  jokerReveal.style.display = "none";
+  mathExpression.textContent = challenge.text + " = ?";
+  mathAnswer.value = "";
+  mathStatus.textContent = "";
+  openAssist();
+
+  setTimeout(() => mathAnswer.focus(), 100);
+}
+
+function checkMath(){
+  if(activeMathAnswer === null) return;
+  const raw = mathAnswer.value.trim();
+
+  if(raw === ""){
+    mathStatus.textContent = "Trebuie să scrii ceva. Telepatia nu e încă suportată. 👀";
+    return;
+  }
+
+  const value = Number(raw);
+  if(value === activeMathAnswer){
+    mathStatus.innerHTML = `✅ Corect! Rezultatul este <strong>${activeMathAnswer}</strong>. 50:50 activat.`;
+    activateFiftyFifty();
+    activeMathAnswer = null;
+    setTimeout(closeAssist, 1100);
+  } else {
+    mathStatus.textContent = "❌ Nu chiar. Mai încearcă — calculatorul imaginar te judecă puțin. 😌";
+  }
+}
+
+function useJoker(){
+  if(answered || usedHelps.has("joker")) return;
+
+  const q = questions[current];
+  const tellsTruth = Math.random() < 0.5;
+  let suggestedIndex;
+
+  if(tellsTruth){
+    suggestedIndex = q.correct;
+  } else {
+    const wrong = q.options.map((_,i)=>i).filter(i => i !== q.correct);
+    suggestedIndex = wrong[Math.floor(Math.random() * wrong.length)];
+  }
+
+  const buttons = [...optionsEl.querySelectorAll(".option")];
+  buttons.forEach(b => b.classList.remove("joker-suggested"));
+  buttons[suggestedIndex].classList.add("joker-suggested");
+
+  assistIcon.textContent = "🎲😈";
+  assistTitle.textContent = "Jokerul a vorbit";
+  assistText.textContent = "Atenție: Jokerul are exact 50% șansă să te ajute și 50% șansă să te trimită elegant în direcția greșită.";
+  mathChallenge.style.display = "none";
+  jokerReveal.style.display = "block";
+  jokerReveal.innerHTML = `🎲 Jokerul șoptește: <strong>„Aș merge pe varianta ${String.fromCharCode(65 + suggestedIndex)}.”</strong><div class="joker-warning">Este adevăr sau sabotaj? Nici noi nu-ți spunem. Mergi la risc. 😏</div>`;
+
+  markHelpUsed("joker");
+  openAssist();
+}
+
+function useLifeline(type){
+  if(type === "fifty") useFiftyFifty();
+  if(type === "joker") useJoker();
+}
+
+function answer(index){
+  if(answered) return;
+  answered = true;
+
+  const q = questions[current];
+  const buttons = [...optionsEl.querySelectorAll(".option")];
+
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === q.correct) btn.classList.add("correct");
+    if(i === index && index !== q.correct) btn.classList.add("wrong");
+  });
+
+  if(index === q.correct){
+    score++;
+    streak++;
+    bestStreak = Math.max(bestStreak, streak);
+    if(q.level === "hard") hardCorrect++;
+    feedbackEl.innerHTML = `✅ <strong>Corect.</strong> ${q.feedback}`;
+  }else{
+    streak = 0;
+    feedbackEl.innerHTML = `😅 <strong>Aproape.</strong> ${q.feedback}`;
+  }
+
+  streakEl.textContent = `🔥 Streak: ${streak}`;
+  nextBtn.style.display = "inline-flex";
+  if(current === 14){
+    nextBtn.textContent = "Crezi că ai terminat? 👀";
+  } else {
+    nextBtn.textContent = current === questions.length - 1 ? "Vezi verdictul 🏆" : "Următoarea ➜";
+  }
+  const answerTotal = current < 15 ? 15 : questions.length;
+  progress.style.width = `${((current + 1) / answerTotal) * 100}%`;
+}
+
+function next(){
+  if(!answered) return;
+  current++;
+
+  // După cele 15 întrebări principale: CHOOSE YOUR BATTLE.
+  if(current === 15 && !surpriseUnlocked){
+    surpriseUnlocked = true;
+    surpriseOverlay.classList.add("show");
+    surpriseOverlay.setAttribute("aria-hidden","false");
+    return;
+  }
+
+  if(current < questions.length) renderQuestion();
+  else showResult();
+}
+
+function createEmojiAvalanche(meta){
+  emojiAvalanche.innerHTML = "";
+  for(let i = 0; i < 78; i++){
+    const el = document.createElement("span");
+    el.className = "avalanche-emoji";
+    el.textContent = meta.emojis[Math.floor(Math.random() * meta.emojis.length)];
+    el.style.left = (Math.random() * 100) + "vw";
+    el.style.fontSize = (24 + Math.random() * 46) + "px";
+    el.style.setProperty("--duration", (1.05 + Math.random() * .9) + "s");
+    el.style.setProperty("--delay", (Math.random() * .55) + "s");
+    el.style.setProperty("--drift", ((Math.random() * 260) - 130) + "px");
+    el.style.setProperty("--spin", ((Math.random() * 900) - 450) + "deg");
+    emojiAvalanche.appendChild(el);
+  }
+}
+
+function chooseBattle(battle){
+  if(selectedBattle) return;
+  selectedBattle = battle;
+
+  const meta = battleMeta[battle];
+  const chosenQuestions = battleQuestions[battle];
+
+  surpriseOverlay.classList.remove("show");
+  surpriseOverlay.setAttribute("aria-hidden","true");
+
+  battleTransitionIcon.textContent = meta.icon;
+  battleTransitionTitle.textContent = meta.label;
+  battleTransitionSubtitle.textContent = meta.subtitle;
+  createEmojiAvalanche(meta);
+
+  battleTransition.classList.add("show");
+  battleTransition.setAttribute("aria-hidden","false");
+
+  // Adăugăm doar cele 3 întrebări din lupta aleasă.
+  questions.push(...chosenQuestions);
+
+  setTimeout(() => {
+    battleTransition.classList.remove("show");
+    battleTransition.setAttribute("aria-hidden","true");
+    renderQuestion();
+  }, 1900);
+}
+
+function getRank(percent){
+  if(percent === 100) return {
+    title:"Emoji Oracle 🔮👑",
+    desc:"Nu interpretezi emoji-urile. Le auzi. Poți citi un thread de Slack cu trei reacții și să reconstruiești întreaga poveste."
+  };
+  if(percent >= 87) return {
+    title:"Native Emoji Speaker 🧠🔥",
+    desc:"Înțelegi contextul, ironia și subtilitatea. Știi că 🙂 poate fi prietenos, rece sau „am notat” în funcție de două pixeli și o situație."
+  };
+  if(percent >= 73) return {
+    title:"Fluent in Emoji 😎💬",
+    desc:"Foarte solid. Comunici bine în dialectul internetului și rareori traduci literal un emoji care clar are altă intenție."
+  };
+  if(percent >= 60) return {
+    title:"Emoji Conversationalist ✨",
+    desc:"Te descurci bine, dar final boss-ul digital mai cere uneori context. Ai vocabular bun, mai lucrăm la sarcasm și ambiguitate."
+  };
+  if(percent >= 40) return {
+    title:"Emoji Tourist 🧳🙂",
+    desc:"Recunoști reperele importante — ❤️😂👍 — dar slangul și combinațiile mai subtile te pot trimite în Google Translate emoțional."
+  };
+  if(percent >= 20) return {
+    title:"Emoji Archaeologist 🗿📜",
+    desc:"Privești emoji-urile ca pe niște hieroglife moderne. Fascinant, misterios și uneori complet de neînțeles."
+  };
+  return {
+    title:"Certified Word Person 📝😌",
+    desc:"Tu preferi propoziții. Cu verbe. Eventual chiar și punctuație. Respect."
+  };
+}
+
+function resultText(){
+  const rawPercent = Math.round((score / questions.length) * 100);
+  const percent = rawPercent;
+  const rank = getRank(percent);
+  const battleName = selectedBattle ? battleMeta[selectedBattle].label : "NEALES";
+  return `Am făcut Emoji Fluency Test 😎
+
+Fluență finală: ${percent}%
+Scor: ${score}/${questions.length}
+Ajutoare folosite: ${helpCount}/2 🎮
+Rang: ${rank.title}
+Best streak: ${bestStreak} 🔥
+Hard mode: ${hardCorrect}/5
+Choose Your Battle: ${battleName} ⚔️
+
+Tu în ce domeniu ai intra? 👀`;
+}
+
+function showResult(){
+  switchScreen(resultScreen);
+  const rawPercent = Math.round((score / questions.length) * 100);
+  const percent = rawPercent;
+  const rank = getRank(percent);
+
+  scorePercent.textContent = `${percent}%`;
+  rankTitle.textContent = rank.title;
+  rankDesc.textContent = `${score} din ${questions.length} răspunsuri corecte. Ai ales ${selectedBattle ? battleMeta[selectedBattle].label : "misterul"} în Choose Your Battle și ai supraviețuit celor 3 întrebări Expert. ${rank.desc}`;
+  scoreRing.style.setProperty("--p", `${percent * 3.6}deg`);
+
+  correctStat.textContent = `${score}/${questions.length}`;
+  bestStreakStat.textContent = `${bestStreak}🔥`;
+  hardStat.textContent = `${hardCorrect}/5`;
+  penaltyStat.textContent = `${helpCount}/2`;
+
+  confettiBurst();
+}
+
+function shareWhatsApp(){
+  const text = encodeURIComponent(resultText());
+  window.open(`https://wa.me/?text=${text}`, "_blank", "noopener,noreferrer");
+}
+
+async function copyResult(){
+  const text = resultText();
+  try{
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = "Copiat! ✅";
+    setTimeout(() => copyBtn.textContent = "Copiază rezultatul 📋", 1500);
+  }catch(e){
+    alert(text);
+  }
+}
+
+function confettiBurst(){
+  const emojis = ["✨","🎉","🔥","💛","🚀","😎","💬","👀"];
+  for(let i=0;i<42;i++){
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    c.style.left = Math.random()*100 + "vw";
+    c.style.setProperty("--x", (Math.random()*200-100) + "px");
+    c.style.animationDelay = (Math.random()*.55) + "s";
+    c.style.fontSize = (12 + Math.random()*13) + "px";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2400);
+  }
+}
+
+startBtn.addEventListener("click", startQuiz);
+nextBtn.addEventListener("click", next);
+restartBtn.addEventListener("click", startQuiz);
+copyBtn.addEventListener("click", copyResult);
+waBtn.addEventListener("click", shareWhatsApp);
+document.addEventListener("click", (e) => {
+  const helpBtn = e.target.closest(".lifeline[data-help]");
+  if(helpBtn) useLifeline(helpBtn.dataset.help);
+});
+
+document.addEventListener("click", (e) => {
+  const battleBtn = e.target.closest(".battle-choice[data-battle]");
+  if(battleBtn){
+    e.preventDefault();
+    chooseBattle(battleBtn.dataset.battle);
+  }
+});
+
+checkMathBtn.addEventListener("click", checkMath);
+mathAnswer.addEventListener("keydown", (e) => {
+  if(e.key === "Enter") checkMath();
+});
+
+skipBattleBtn.addEventListener("click", () => {
+  surpriseOverlay.classList.remove("show");
+  surpriseOverlay.setAttribute("aria-hidden","true");
+  showResult();
+});
+
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape" && assistModal.classList.contains("show")){
+    closeAssist();
+  }
+});
+
+closeAssistBtn.addEventListener("click", closeAssist);
+assistModal.addEventListener("click", (e) => {
+  if(e.target === assistModal) closeAssist();
+});
+
+</script>
+</body>
+</html>
